@@ -2,12 +2,19 @@ import { useState } from 'react'
 import './App.css'
 import GameBoard from './components/GameBoard/GameBoard'
 import Player from './components/PlayerComponent/Player'
+import Log from './components/LogComponent/Log'
 
 function App() {
   const [activePlayer, setActivePlayer] = useState("X")
+  const [gameTurns, setGameTurns] = useState<string[]>([])
 
-  const handleSelectSquare = () => {
+  const handleSelectSquare = (action:string) => {
     setActivePlayer(value => value === "X" ? "O": "X")
+    setGameTurns((values) => {
+      const newTurns = [...values]
+      newTurns.unshift(action)
+      return newTurns;
+    })
   }
 
   return (
@@ -21,7 +28,7 @@ function App() {
         <GameBoard symbol={activePlayer} changeSelectSquare={handleSelectSquare}/>
       </section>
 
-      log
+      <Log logs={gameTurns}/>
     </main>
   )
 }

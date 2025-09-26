@@ -9,7 +9,7 @@ const initialBoard: string[][] = [
 
 interface Props {
   symbol: string
-  changeSelectSquare: () => void
+  changeSelectSquare: (action: string) => void
 }
 
 function GameBoard({symbol, changeSelectSquare}:Props){
@@ -22,7 +22,7 @@ function GameBoard({symbol, changeSelectSquare}:Props){
       newBoard[rowIndex][colIndex] = symbol
       return newBoard;
       })
-      changeSelectSquare()
+      changeSelectSquare(`${symbol} in row ${rowIndex + 1} and col ${colIndex + 1}`)
     }
   }
 
