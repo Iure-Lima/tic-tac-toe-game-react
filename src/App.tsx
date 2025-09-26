@@ -13,12 +13,12 @@ function App() {
   return (
     <main>
       <section id="game-container">
-        <ol id="players">
-          <Player initialName='Iure' symbol="X"/>
-          <Player initialName='Lucas' symbol="O"/>
+        <ol id="players" className='highlight-player'>
+          <Player initialName='Iure' symbol="X" isActive={activePlayer === "X"}/>
+          <Player initialName='Lucas' symbol="O" isActive={activePlayer === "O"}/>
         </ol>
 
-        <GameBoard symbol={activePlayer}/>
+        <GameBoard symbol={activePlayer} changeSelectSquare={handleSelectSquare}/>
       </section>
 
       log

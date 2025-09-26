@@ -25,16 +25,6 @@
   border: 2px solid transparent;
 }
 
-#players.highlight-player li.active {
-  border-color: #f6e35a;
-  animation: pulse 2s infinite ease-in-out;
-}
-
-#players.highlight-player li.active .player-name,
-#players.highlight-player li.active .player-symbol {
-  color: #f6e35a;
-}
-
 ol {
   list-style: none;
   margin: 0;

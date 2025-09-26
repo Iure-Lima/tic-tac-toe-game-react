@@ -52,6 +52,16 @@
   color: #e1dec7;
 }
 
+#players.highlight-player li.active {
+  border-color: #f6e35a;
+  animation: pulse 2s infinite ease-in-out;
+}
+
+#players.highlight-player li.active .player-name,
+#players.highlight-player li.active .player-symbol {
+  color: #f6e35a;
+}
+
 @keyframes pulse-text {
   0% {
     color: #e1dec7;

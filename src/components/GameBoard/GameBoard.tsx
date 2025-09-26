@@ -9,9 +9,10 @@ const initialBoard: string[][] = [
 
 interface Props {
   symbol: string
+  changeSelectSquare: () => void
 }
 
-function GameBoard({symbol}:Props){
+function GameBoard({symbol, changeSelectSquare}:Props){
   const [gameBoard, setGameBoard] = useState<string[][]>(initialBoard)
 
   const handleSelectSquare = (rowIndex: number, colIndex:number) =>{
@@ -19,9 +20,9 @@ function GameBoard({symbol}:Props){
       setGameBoard((board) => {
       const newBoard = [...board]
       newBoard[rowIndex][colIndex] = symbol
-            console.log(newBoard)
       return newBoard;
-    })
+      })
+      changeSelectSquare()
     }
   }
 
