@@ -3,6 +3,7 @@ import './App.css'
 import GameBoard from './components/GameBoard/GameBoard'
 import Player from './components/PlayerComponent/Player'
 import Log from './components/LogComponent/Log'
+import GameOver from './components/GameOver/GameOver'
 
 function App() {
   const [activePlayer, setActivePlayer] = useState("X")
@@ -22,6 +23,8 @@ function App() {
     })
   }
 
+  const hasDraw = gameTurns.length === 9 && !winner;
+
   return (
     <main>
       <section id="game-container">
@@ -29,7 +32,7 @@ function App() {
           <Player initialName='Iure' symbol="X" isActive={activePlayer === "X"}/>
           <Player initialName='Lucas' symbol="O" isActive={activePlayer === "O"}/>
         </ol>
-        {winner && <p>You Won, {winner}!</p>}
+        {(winner || hasDraw) && <GameOver winner={winner}/>}
         <GameBoard symbol={activePlayer} changeSelectSquare={handleSelectSquare} handleWinner={handleWinner}/>
       </section>
 
