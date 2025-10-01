@@ -3,11 +3,15 @@ import './App.css'
 import GameBoard from './components/GameBoard/GameBoard'
 import Player from './components/PlayerComponent/Player'
 import Log from './components/LogComponent/Log'
-import { WINNING_COMBINATIONS } from './data/winning-combinations'
 
 function App() {
   const [activePlayer, setActivePlayer] = useState("X")
   const [gameTurns, setGameTurns] = useState<string[]>([])
+  const [winner, setWinner] = useState<string>("");
+
+  const handleWinner = (winnerSymbol: string) => {
+    setWinner(winnerSymbol)
+  }
 
   const handleSelectSquare = (action:string) => {
     setActivePlayer(value => value === "X" ? "O": "X")
@@ -25,8 +29,8 @@ function App() {
           <Player initialName='Iure' symbol="X" isActive={activePlayer === "X"}/>
           <Player initialName='Lucas' symbol="O" isActive={activePlayer === "O"}/>
         </ol>
-
-        <GameBoard symbol={activePlayer} changeSelectSquare={handleSelectSquare}/>
+        {winner && <p>You Won, {winner}!</p>}
+        <GameBoard symbol={activePlayer} changeSelectSquare={handleSelectSquare} handleWinner={handleWinner}/>
       </section>
 
       <Log logs={gameTurns}/>
