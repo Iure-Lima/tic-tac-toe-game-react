@@ -3,6 +3,7 @@ import './App.css'
 import GameBoard from './components/GameBoard/GameBoard'
 import Player from './components/PlayerComponent/Player'
 import Log from './components/LogComponent/Log'
+import { WINNING_COMBINATIONS } from './data/winning-combinations'
 
 function App() {
   const [activePlayer, setActivePlayer] = useState("X")
