@@ -5,14 +5,16 @@ interface Props {
   symbol: string
   initialName: string
   isActive:boolean
+  handlePlayerNameChange: (symbol: string, newName:string) => void;
 }
 
-function Player({symbol, initialName, isActive}:Props){
+function Player({symbol, initialName, isActive, handlePlayerNameChange}:Props){
   const [isEditing, setIsEditing] = useState(false)
   const [playerName, setPlayerName] = useState(initialName)
 
   const handleIsEditing = () => {
     setIsEditing(editing => !editing)
+    if (isEditing) handlePlayerNameChange(symbol, playerName)
   }
 
   const handleChangeName = (event: unknown) => {

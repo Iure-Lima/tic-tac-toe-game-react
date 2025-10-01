@@ -12,13 +12,17 @@ const initialBoard: string[][] = [
 ]
 
 function App() {
+  const [players, setPlayers] = useState({
+    X: "Player 1",
+    O: "Player 2"
+  })
   const [activePlayer, setActivePlayer] = useState("X")
   const [gameTurns, setGameTurns] = useState<string[]>([])
-  const [winner, setWinner] = useState<string>("");
+  const [winner, setWinner] = useState("");
   const [gameBoard, setGameBoard] = useState<string[][]>([...initialBoard.map(array => [...array])])
 
   const handleWinner = (winnerSymbol: string) => {
-    setWinner(winnerSymbol)
+    setWinner(players[winnerSymbol])
   }
 
   const handleSelectSquare = (rowIndex: number, colIndex:number) =>{
@@ -45,12 +49,21 @@ function App() {
     setGameBoard([...initialBoard.map(array => [...array])]);
   }
 
+  const handlePlayerNameChange = (symbol:string, newName:string) => {
+    setPlayers(prevPlayer => {
+      return {
+        ...prevPlayer,
+        [symbol]:newName
+      }
+    })
+  }
+
   return (
     <main>
       <section id="game-container">
         <ol id="players" className='highlight-player'>
-          <Player initialName='Player 1' symbol="X" isActive={activePlayer === "X"}/>
-          <Player initialName='Player 2' symbol="O" isActive={activePlayer === "O"}/>
+          <Player initialName='Player 1' symbol="X" isActive={activePlayer === "X"} handlePlayerNameChange={handlePlayerNameChange}/>
+          <Player initialName='Player 2' symbol="O" isActive={activePlayer === "O"} handlePlayerNameChange={handlePlayerNameChange}/>
         </ol>
         {(winner || hasDraw) && <GameOver winner={winner} handleRestart = {handleRestart}/>}
         <GameBoard changeSelectSquare={handleSelectSquare} handleWinner={handleWinner} gameBoard={gameBoard}/>
