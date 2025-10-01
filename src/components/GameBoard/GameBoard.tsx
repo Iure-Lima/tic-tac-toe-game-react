@@ -1,23 +1,16 @@
-import { useState } from "react";
 import "./GameBoard.css"
 import { WINNING_COMBINATIONS } from "../../data/winning-combinations";
 
-const initialBoard: string[][] = [
-  ["", "", ""],
-  ["", "", ""],
-  ["", "", ""]
-]
 
 interface Props {
-  symbol: string
-  changeSelectSquare: (action: string) => void
+  gameBoard: string[][]
+  changeSelectSquare: (rowIndex: number, colIndex:number) => void
   handleWinner: (winnerSymbol: string) => void
 }
 
 
 
-function GameBoard({symbol, changeSelectSquare, handleWinner}:Props){
-  const [gameBoard, setGameBoard] = useState<string[][]>(initialBoard)
+function GameBoard({changeSelectSquare, handleWinner, gameBoard}:Props){
 
   for (const combination of WINNING_COMBINATIONS){
     const firstSquareSymbol = gameBoard[combination[0].row][combination[0].column]
@@ -30,12 +23,7 @@ function GameBoard({symbol, changeSelectSquare, handleWinner}:Props){
   }
 
   const handleSelectSquare = (rowIndex: number, colIndex:number) =>{
-    setGameBoard((board) => {
-      const newBoard = [...board]
-      newBoard[rowIndex][colIndex] = symbol
-      return newBoard;
-      })
-      changeSelectSquare(`${symbol} in row ${rowIndex + 1} and col ${colIndex + 1}`)
+    changeSelectSquare(rowIndex, colIndex)
   }
 
   return (
